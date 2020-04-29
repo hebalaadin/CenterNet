@@ -1,13 +1,11 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
 import pycocotools.coco as coco
 import numpy as np
 import torch
 import json
 import os
-
 import torch.utils.data as data
 
 class MFellows(data.Dataset):
@@ -21,11 +19,11 @@ class MFellows(data.Dataset):
   def __init__(self, opt, split):
     super(MFellows, self).__init__()
     self.data_dir = os.path.join(opt.data_dir, 'mfellows')
-    self.img_dir = os.path.join(self.data_dir, 'images')
+    self.img_dir = os.path.join(self.data_dir, 'front_images')
     _ann_name = {'train': 'training', 'val': 'training'}
     self.annot_path = os.path.join(
-      self.data_dir, 'annotations',
-      'pascal_{}.json').format(_ann_name[split])
+      self.data_dir, 'front_ann',
+      'front_{}.json').format(_ann_name[split])
     self.max_objs = 50
     self.class_name = [
       'first_name',
@@ -34,7 +32,6 @@ class MFellows(data.Dataset):
       'address_2',
       'id_number',
       'birth_date']
-​
     self._valid_ids = np.arange(1, 7, dtype=np.int32)
     self.cat_ids = {v: i for i, v in enumerate(self._valid_ids)}
     self._data_rng = np.random.RandomState(123)
