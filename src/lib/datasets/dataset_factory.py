@@ -8,6 +8,7 @@ from .sample.ctdet import CTDetDataset
 from .sample.multi_pose import MultiPoseDataset
 
 from .dataset.coco import COCO
+from .dataset.mfellows import MFellows
 from .dataset.pascal import PascalVOC
 from .dataset.kitti import KITTI
 from .dataset.coco_hp import COCOHP
@@ -15,6 +16,7 @@ from .dataset.coco_hp import COCOHP
 
 dataset_factory = {
   'coco': COCO,
+  'mfellows': MFellows,
   'pascal': PascalVOC,
   'kitti': KITTI,
   'coco_hp': COCOHP
@@ -32,4 +34,3 @@ def get_dataset(dataset, task):
   class Dataset(dataset_factory[dataset], _sample_factory[task]):
     pass
   return Dataset
-  
